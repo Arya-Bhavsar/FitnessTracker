@@ -1,0 +1,12 @@
+build/
+DerivedData/
+*.xcuserstate
+*.xcworkspace
+*.pbxuser
+*.mode1v3
+*.mode2v3
+
+GoogleService-Info.plist
+FitnessTracker/GoogleService-Info.plist
+
+.DS_Store
