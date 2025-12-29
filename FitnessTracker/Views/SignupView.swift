@@ -60,6 +60,7 @@ struct SignupView: View {
                     }
                 }
                 .autocapitalization(.none)
+                .textInputAutocapitalization(.never)
                 .focused($focusedField, equals: Field.password)
                 .fieldStyle(isFocused: focusedField == Field.password)
                 .padding(10)

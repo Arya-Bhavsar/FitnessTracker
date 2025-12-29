@@ -18,7 +18,7 @@ struct LoginView: View {
     
     @State private var isPasswordVisible: Bool = false
     
-    @FocusState private var focuesedField: Field?
+    @FocusState private var focusedField: Field?
     
     var body: some View {
         VStack {
@@ -28,11 +28,9 @@ struct LoginView: View {
             
             // Email text field
             TextField("Email", text: $email)
-                .textContentType(.emailAddress)
-                .keyboardType(.emailAddress)
                 .autocapitalization(.none)
-                .focused($focuesedField, equals: Field.email)
-                .fieldStyle(isFocused: focuesedField == Field.email)
+                .focused($focusedField, equals: Field.email)
+                .fieldStyle(isFocused: focusedField == Field.email)
                 .padding(10)
             
             // Password field with show/hide password toggle
@@ -46,8 +44,9 @@ struct LoginView: View {
                     }
                 }
                 .autocapitalization(.none)
-                .focused($focuesedField, equals: Field.password)
-                .fieldStyle(isFocused: focuesedField == Field.password)
+                .textInputAutocapitalization(.never)
+                .focused($focusedField, equals: Field.password)
+                .fieldStyle(isFocused: focusedField == Field.password)
                 .padding(10)
                 
                 // Button to toggle between show/hide password
@@ -78,7 +77,7 @@ struct LoginView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .contentShape(Rectangle())
-        .onTapGesture { focuesedField = nil }
+        .onTapGesture { focusedField = nil }
         .padding()
     }
 }
