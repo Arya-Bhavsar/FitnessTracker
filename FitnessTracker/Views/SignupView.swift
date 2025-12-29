@@ -58,7 +58,6 @@ struct SignupView: View {
             
             // Password text field
             SecureField("Password", text: $password)
-                .textContentType(.newPassword)
                 .focused($focusedField, equals: Field.password)
                 .fieldStyle(isFocused: focusedField == Field.password)
                 .padding(10)
@@ -78,6 +77,9 @@ struct SignupView: View {
             .buttonStyle(.plain)
             .padding(10)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity) // Needed to make empty space tappable
+        .contentShape(Rectangle()) // Needed to make empty space tappable
+        .onTapGesture { focusedField = nil }
         .padding()
     }
 }
