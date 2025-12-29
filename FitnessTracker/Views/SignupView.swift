@@ -5,14 +5,6 @@
 //  Created by Arya Bhavsar on 12/28/25.
 //
 
-
-//
-//  SignupView.swift
-//  FitnessTracker
-//
-//  Created by Arya Bhavsar on 12/28/25.
-//
-
 import SwiftUI
 
 struct SignupView: View {
@@ -75,7 +67,8 @@ struct SignupView: View {
                     .cornerRadius(8)
             }
             .buttonStyle(.plain)
-            .padding(10)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 30)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity) // Needed to make empty space tappable
         .contentShape(Rectangle()) // Needed to make empty space tappable
