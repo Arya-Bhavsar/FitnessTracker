@@ -25,7 +25,6 @@ struct SignupView: View {
     var body: some View {
         VStack {
             Text("Sign Up")
-                .padding(10)
                 .font(.largeTitle)
                 .fontWeight(.bold)
             
@@ -52,7 +51,7 @@ struct SignupView: View {
             
             // Password field with show/hide password toggle
             ZStack(alignment: .trailing) {
-                // Conditional switches between text and secure fields
+                // Conditionally switches between text and secure fields
                 Group {
                     if isPasswordVisible {
                         TextField("Password", text: $password)
