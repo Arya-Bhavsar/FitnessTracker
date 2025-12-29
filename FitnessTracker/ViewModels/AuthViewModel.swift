@@ -10,7 +10,6 @@ import Combine
 import FirebaseAuth
 import FirebaseFirestore
 
-@MainActor
 class AuthViewModel: ObservableObject {
     @Published var user: UserModel?
     @Published var isLoggedIn: Bool = false
@@ -63,9 +62,7 @@ class AuthViewModel: ObservableObject {
             // Fetch user data from Firestore (and not Auth)
             self?.db.collection("users").document(uid).getDocument { snapshot, error in
                 if let error = error {
-                    Task { @MainActor in
-                        self?.errorMessage = error.localizedDescription
-                    }
+                    self?.errorMessage = error.localizedDescription
                     return
                 }
                 
