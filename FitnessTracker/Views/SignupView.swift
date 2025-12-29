@@ -18,6 +18,8 @@ struct SignupView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     
+    @State private var isPasswordVisible: Bool = false
+    
     @FocusState private var focusedField: Field?
     
     var body: some View {
@@ -48,11 +50,29 @@ struct SignupView: View {
                 .fieldStyle(isFocused: focusedField == Field.email)
                 .padding(10)
             
-            // Password text field
-            SecureField("Password", text: $password)
+            // Password field with show/hide password toggle
+            ZStack(alignment: .trailing) {
+                // Conditional switches between text and secure fields
+                Group {
+                    if isPasswordVisible {
+                        TextField("Password", text: $password)
+                    } else {
+                        SecureField("Password", text: $password)
+                    }
+                }
+                .autocapitalization(.none)
                 .focused($focusedField, equals: Field.password)
                 .fieldStyle(isFocused: focusedField == Field.password)
                 .padding(10)
+                
+                // Button to toggle between show/hide password
+                Button {
+                    isPasswordVisible.toggle()
+                } label: {
+                    Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
+                }
+                .padding(.trailing, 20)
+            }
             
             // Sign up button
             Button {
