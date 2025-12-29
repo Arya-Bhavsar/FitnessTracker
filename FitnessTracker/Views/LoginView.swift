@@ -27,14 +27,14 @@ struct LoginView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 
-                // Email text field
+                // MARK: - email text field
                 TextField("Email", text: $email)
                     .autocapitalization(.none)
                     .focused($focusedField, equals: Field.email)
                     .fieldStyle(isFocused: focusedField == Field.email)
                     .padding(10)
                 
-                // Password field with show/hide password toggle
+                // MARK: - password field with show/hide password toggle
                 ZStack(alignment: .trailing) {
                     // Conditionally switches between text and secure fields
                     Group {
@@ -59,7 +59,7 @@ struct LoginView: View {
                     .padding(.trailing, 20)
                 }
                 
-                // Log in button
+                // MARK: - login button
                 Button {
                     // Logic here
                 } label: {
@@ -75,7 +75,7 @@ struct LoginView: View {
                 .padding(.horizontal, 10)
                 .padding(.top, 30)
                 
-                // Navigation to the signup page
+                // MARK: - navigation to the signup page
                 HStack {
                     Text("Don't have an account?")
                     NavigationLink("Sign Up", destination: SignupView())

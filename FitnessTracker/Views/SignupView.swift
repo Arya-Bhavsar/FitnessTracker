@@ -29,19 +29,19 @@ struct SignupView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 
-                // First name text field
+                // MARK: - first name text field
                 TextField("First Name", text: $firstName)
                     .focused($focusedField, equals: Field.firstName)
                     .fieldStyle(isFocused: focusedField == Field.firstName)
                     .padding(10)
                 
-                // Last name text field
+                // MARK: - last name text field
                 TextField("Last Name", text: $lastName)
                     .focused($focusedField, equals: Field.lastName)
                     .fieldStyle(isFocused: focusedField == Field.lastName)
                     .padding(10)
                 
-                // Email text field
+                // MARK: - email text field
                 TextField("Email", text: $email)
                     .textContentType(.emailAddress)
                     .keyboardType(.emailAddress)
@@ -50,7 +50,7 @@ struct SignupView: View {
                     .fieldStyle(isFocused: focusedField == Field.email)
                     .padding(10)
                 
-                // Password field with show/hide password toggle
+                // MARK: - password field with show/hide password toggle
                 ZStack(alignment: .trailing) {
                     // Conditionally switches between text and secure fields
                     Group {
@@ -75,7 +75,7 @@ struct SignupView: View {
                     .padding(.trailing, 20)
                 }
                 
-                // Sign up button
+                // MARK: - signup button
                 Button {
                     // Logic here
                 } label: {
@@ -91,7 +91,7 @@ struct SignupView: View {
                 .padding(.horizontal, 10)
                 .padding(.top, 30)
                 
-                // Navigation to the login page
+                // MARK: - navigation to the login page
                 HStack {
                     Text("Already have an account?")
                     NavigationLink("Log In", destination: LoginView())
