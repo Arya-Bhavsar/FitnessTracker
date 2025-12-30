@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var authVM: AuthViewModel
+    @State private var showLogoutAlert: Bool = false
     
     var body: some View {
         VStack {
@@ -28,7 +29,7 @@ struct ContentView: View {
                 
                 // Logout button
                 Button {
-                    // Logic here
+                    showLogoutAlert = true
                 } label: {
                     Text("Log Out")
                         .fontWeight(.semibold)
@@ -38,6 +39,11 @@ struct ContentView: View {
                         .cornerRadius(10)
                 }
                 .buttonStyle(.plain)
+                .alert("Are you sure you want to log out?", isPresented: $showLogoutAlert) {
+                    Button("Confirm", role: .destructive) {
+                        // logic here
+                    }
+                }
             }
             .padding()
             

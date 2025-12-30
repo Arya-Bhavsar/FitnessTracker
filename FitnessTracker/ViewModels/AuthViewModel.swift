@@ -85,6 +85,8 @@ class AuthViewModel: ObservableObject {
     }
     
     // MARK: - Logout function
-    
+    func logout() {
+        
+    }
 }
 
