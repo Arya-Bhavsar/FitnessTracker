@@ -87,7 +87,7 @@ struct SignupView: View {
                         .padding(15)
                         .background(Color.blue)
                         .foregroundColor(.white)
-                        .cornerRadius(8)
+                        .cornerRadius(10)
                 }
                 .buttonStyle(.plain)
                 .padding(.horizontal, 10)

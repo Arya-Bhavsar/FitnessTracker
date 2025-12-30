@@ -12,12 +12,40 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, \(authVM.user?.firstName ?? "Guest") \(authVM.user?.lastName ?? "")")
+            // MARK: - Top bar
+            HStack {
+                Image(systemName: "person.circle.fill")
+                    .resizable()
+                    .frame(width: 32, height: 32)
+                    .imageScale(.large)
+                    .foregroundStyle(.tint)
+                
+                Text("\(authVM.user?.firstName ?? "Guest") \(authVM.user?.lastName ?? "")")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                
+                Spacer()
+                
+                // Logout button
+                Button {
+                    // Logic here
+                } label: {
+                    Text("Log Out")
+                        .fontWeight(.semibold)
+                        .padding(10)
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .buttonStyle(.plain)
+            }
+            .padding()
+            
+            // MARK: - Placeholder
+            List {
+                Text("Test")
+            }
         }
-        .padding()
     }
 }
 
