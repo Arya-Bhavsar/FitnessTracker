@@ -16,6 +16,8 @@ struct LoginView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     
+    @EnvironmentObject var authVM: AuthViewModel
+    
     @State private var isPasswordVisible: Bool = false
     
     @FocusState private var focusedField: Field?
@@ -61,7 +63,7 @@ struct LoginView: View {
                 
                 // MARK: - login button
                 Button {
-                    // Logic here
+                    authVM.login(email: email, password: password)
                 } label: {
                     Text("Log In")
                         .fontWeight(.semibold)

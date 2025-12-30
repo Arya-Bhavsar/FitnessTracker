@@ -18,6 +18,8 @@ struct SignupView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     
+    @EnvironmentObject var authVM: AuthViewModel
+    
     @State private var isPasswordVisible: Bool = false
     
     @FocusState private var focusedField: Field?
@@ -77,7 +79,7 @@ struct SignupView: View {
                 
                 // MARK: - signup button
                 Button {
-                    // Logic here
+                    authVM.signup(firstName: firstName, lastName: lastName, email: email, password: password)
                 } label: {
                     Text("Sign Up")
                         .fontWeight(.semibold)

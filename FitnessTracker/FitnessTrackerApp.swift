@@ -16,9 +16,17 @@ struct FitnessTrackerApp: App {
         print("Firebase is configured: \(FirebaseApp.app() != nil)")
     }
     
+    @StateObject var authVM = AuthViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            if authVM.isLoggedIn {
+                ContentView()
+                    .environmentObject(authVM)
+            } else {
+                LoginView()
+                    .environmentObject(authVM)
+            }
         }
     }
 }
