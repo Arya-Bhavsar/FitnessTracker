@@ -86,7 +86,13 @@ class AuthViewModel: ObservableObject {
     
     // MARK: - Logout function
     func logout() {
-        
+        do {
+            try auth.signOut()
+            user = nil
+            isLoggedIn = false
+        } catch {
+            errorMessage = error.localizedDescription
+        }
     }
 }
 

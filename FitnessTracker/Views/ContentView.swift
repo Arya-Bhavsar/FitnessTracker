@@ -41,7 +41,7 @@ struct ContentView: View {
                 .buttonStyle(.plain)
                 .alert("Are you sure you want to log out?", isPresented: $showLogoutAlert) {
                     Button("Confirm", role: .destructive) {
-                        // logic here
+                        authVM.logout()
                     }
                 }
             }
