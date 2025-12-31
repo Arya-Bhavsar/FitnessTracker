@@ -19,7 +19,7 @@ struct ContentView: View {
             }
             
             Tab("Create Plan", systemImage: "plus") {
-                
+                CreatePlanView()
             }
         }
     }
