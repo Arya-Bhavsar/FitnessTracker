@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            TopBarView()
-            
-            // Placeholder
-            List {
-                Text("Test")
+        TabView {
+            Tab("Home", systemImage: "house.fill") {
+                HomeView()
+            }
+            Tab("Plans", systemImage: "list.bullet") {
+                PlansView()
             }
         }
     }
