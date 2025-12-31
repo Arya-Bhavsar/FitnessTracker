@@ -13,8 +13,13 @@ struct ContentView: View {
             Tab("Home", systemImage: "house.fill") {
                 HomeView()
             }
-            Tab("Plans", systemImage: "list.bullet") {
+            
+            Tab("Saved Plans", systemImage: "dumbbell.fill") {
                 PlansView()
+            }
+            
+            Tab("Create Plan", systemImage: "plus") {
+                
             }
         }
     }
