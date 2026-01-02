@@ -13,6 +13,7 @@ struct TopBarView: View {
     
     var body: some View {
         HStack {
+            // MARK: - Profile info
             Image(systemName: "person.circle.fill")
                 .resizable()
                 .frame(width: 32, height: 32)
@@ -25,7 +26,7 @@ struct TopBarView: View {
             
             Spacer()
             
-            // Logout button
+            // MARK: - Logout button
             Button {
                 showLogoutAlert = true
             } label: {
