@@ -10,8 +10,6 @@ import SwiftUI
 struct PlansView: View {
     var body: some View {
         VStack {
-            TopBarView()
-            
             List {
                 Text("Plan 1")
                 Text("Plan 2")

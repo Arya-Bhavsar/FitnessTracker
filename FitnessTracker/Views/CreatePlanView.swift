@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CreatePlanView: View {
     var body: some View {
-        Text("Hello, World!")
+        List {
+            Text("Hello, World!")
+        }
     }
 }
