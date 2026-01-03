@@ -23,13 +23,14 @@ struct TodayCardView: View {
             Text("Today")
                 .font(.title)
                 .fontWeight(.bold)
+                .frame(maxWidth: .infinity, alignment: .leading)
             
             content
         }
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 16)
-                .fill(Color(.secondarySystemBackground))
+                .fill(Color(.secondarySystemGroupedBackground))
                 .shadow(radius: 4)
         )
     }
@@ -39,10 +40,10 @@ struct TodayCardView: View {
     private var content: some View {
         switch todayState {
         case .noActivePlan:
-            Text("No active plan is selected")
+            Text("No active workout plan is selected")
                 .foregroundStyle(.secondary)
         case .restDay:
-            Text("Rest day")
+            Text("Rest day today! Take it easy!")
                 .foregroundStyle(.secondary)
         case .workout(let exercises):
             // List of exercises
@@ -58,6 +59,5 @@ struct TodayCardView: View {
 #Preview {
     TodayCardView(todayState: .noActivePlan)
     TodayCardView(todayState: .restDay)
-    
     TodayCardView(todayState: .workout(["Push-ups", "Lunges", "Plank"]))
 }

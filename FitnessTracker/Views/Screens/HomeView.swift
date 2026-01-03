@@ -10,12 +10,22 @@ import SwiftUI
 struct HomeView: View {
     var body: some View {
         VStack {
+            // The top bar with profile info
             TopBarView()
             
-            List {
-                Text("test 1")
-                Text("test 2")
+            // Main home screen content
+            ScrollView {
+                VStack(spacing: 12) {
+                    // Card with today's workout goals
+                    TodayCardView(todayState: .noActivePlan) // Hardcoded the state for now
+                    
+                    // More cards here
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
             }
+            .frame(maxWidth: .infinity)
+            .background(Color(.systemGroupedBackground))
         }
     }
 }
