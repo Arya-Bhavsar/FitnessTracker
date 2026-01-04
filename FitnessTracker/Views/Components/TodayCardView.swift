@@ -26,13 +26,14 @@ struct TodayCardView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             content
+                .padding()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color(.secondarySystemGroupedBackground))
+                        .shadow(radius: 4)
+                )
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color(.secondarySystemGroupedBackground))
-                .shadow(radius: 4)
-        )
     }
     
     // MARK: - Conditional views for the card
@@ -40,7 +41,7 @@ struct TodayCardView: View {
     private var content: some View {
         switch todayState {
         case .noActivePlan:
-            Text("No active workout plan is selected")
+            Text("No active workout plan\nSelect a new plan to get started!")
                 .foregroundStyle(.secondary)
         case .restDay:
             Text("Rest day today! Take it easy!")
