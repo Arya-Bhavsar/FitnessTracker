@@ -13,13 +13,15 @@ struct HomeView: View {
             // The top bar with profile info
             TopBarView()
             
-            // Main home screen content
+            // MARK: - Main home screen content
             ScrollView {
                 VStack(spacing: 12) {
                     // Card with today's workout goals
                     TodayCardView(todayState: .noActivePlan) // Hardcoded the state for now
+                        .padding(.bottom, 20)
                     
                     // More cards here
+                    WeeklyProgressView()
                 }
                 .padding()
                 .frame(maxWidth: .infinity)

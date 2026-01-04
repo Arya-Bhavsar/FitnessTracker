@@ -25,6 +25,7 @@ struct TodayCardView: View {
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
+            // Conditional view for the card
             content
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -44,7 +45,7 @@ struct TodayCardView: View {
             Text("No active workout plan\nSelect a new plan to get started!")
                 .foregroundStyle(.secondary)
         case .restDay:
-            Text("Rest day today! Take it easy!")
+            Text("Rest day!\nTake a break today!")
                 .foregroundStyle(.secondary)
         case .workout(let exercises):
             // List of exercises
