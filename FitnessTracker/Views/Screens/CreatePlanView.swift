@@ -53,6 +53,7 @@ struct CreatePlanView: View {
                         Image(systemName: "sparkles")
                             .font(.title)
                             .foregroundColor(.primary)
+                            
                         
                         Text("Use AI to Create Plan")
                             .font(.headline)
@@ -65,9 +66,23 @@ struct CreatePlanView: View {
                     }
                     .padding()
                     .background(
-                        RoundedRectangle(cornerRadius: 16)
-                            .fill(Color(.secondarySystemGroupedBackground))
-                            .shadow(radius: 3)
+                        ZStack {
+                            // Glow behind the card
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(
+                                    LinearGradient(
+                                        colors: [.blue, .purple, .red],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    lineWidth: 4
+                                )
+                                .blur(radius: 4)
+                                
+                            
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(Color(.secondarySystemGroupedBackground))
+                        }
                     )
                 }
                 
