@@ -57,9 +57,3 @@ struct TodayCardView: View {
         }
     }
 }
-
-#Preview {
-    TodayCardView(todayState: .noActivePlan)
-    TodayCardView(todayState: .restDay)
-    TodayCardView(todayState: .workout(["Push-ups", "Lunges", "Plank"]))
-}
