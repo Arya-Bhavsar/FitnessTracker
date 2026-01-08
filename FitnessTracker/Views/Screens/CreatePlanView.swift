@@ -96,6 +96,7 @@ struct CreatePlanView: View {
                 Spacer()
             }
             .padding()
+            .background(Color(.systemGroupedBackground))
             .navigationTitle("Create a New Plan")
 
         }
