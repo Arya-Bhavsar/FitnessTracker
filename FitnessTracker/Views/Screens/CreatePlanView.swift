@@ -12,7 +12,7 @@ struct CreatePlanView: View {
         NavigationStack {
             VStack {
                 
-                //MARK: - Link to create a new plan manually
+                // MARK: - Link to create a new plan manually
                 NavigationLink {
                     ManualPlanView()
                 } label: {

@@ -7,6 +7,7 @@
 
 import FirebaseFirestore
 
+// MARK: - User Model
 struct UserModel: Identifiable, Codable {
     @DocumentID var id: String? // Firebase UID
     var firstName: String
