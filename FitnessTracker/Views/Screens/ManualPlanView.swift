@@ -8,20 +8,46 @@
 import SwiftUI
 
 struct ManualPlanView: View {
-    @State private var isPresented: Bool = false
+    @StateObject var workoutPlanVM: WorkoutPlanViewModel
+    @State var planName: String = ""
     
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text("Monday")) {
-                    Toggle("Rest Day", isOn: $isPresented)
+                // Plan Name TextField
+                Section("Plan Name") {
+                    TextField("Enter Plan Name", text: $planName)
+                }
+                
+                // MARK: - Section for each day of the week
+                ForEach($workoutPlanVM.weekPlans) { $day in
+                    Section(day.name) {
+                        // Toggle for rest day
+                        Toggle("Rest Day", isOn: $day.isRestDay)
+                        
+                        // List of exercises if not rest day
+                        if !day.isRestDay {
+                            ForEach(day.exercises.indices, id: \.self) { index in
+                                TextField("Exercise", text: $day.exercises[index])
+                            }
+                            
+                            // Button to create an empty TextField
+                            Button("Add Exercise", action: {
+                                day.exercises.append("")
+                            })
+                        }
+                    }
+                }
+                
+                // MARK: - Save Button
+                Section {
+                    Button("Save Plan") {
+                        workoutPlanVM.savePlan(name: planName)
+                    }
+                    .disabled(planName.isEmpty)
                 }
             }
             .navigationTitle("Weekly Plan")
         }
     }
-}
-
-#Preview {
-    ManualPlanView()
 }
