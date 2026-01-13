@@ -18,3 +18,7 @@ struct PlansView: View {
         }
     }
 }
+
+#Preview {
+    PlansView()
+}

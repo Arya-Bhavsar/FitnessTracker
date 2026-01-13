@@ -16,7 +16,9 @@ struct CreatePlanView: View {
                 
                 // MARK: - Link to create a new plan manually
                 NavigationLink {
-                    ManualPlanView(workoutPlanVM: WorkoutPlanViewModel(userID: authVM.user!.id!))
+                    if let userID = authVM.user?.id {
+                        ManualPlanView(workoutPlanVM: WorkoutPlanViewModel(userID: userID))
+                    }
                 } label: {
                     HStack {
                         Image(systemName: "pencil.line")
