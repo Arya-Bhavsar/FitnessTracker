@@ -17,6 +17,7 @@ struct DayPlan: Identifiable {
     var exercises: [String] = []
 }
 
+@MainActor
 class WorkoutPlanViewModel: ObservableObject {
     @Published var weekPlans: [DayPlan] = [
         DayPlan(name: "Monday"),
@@ -28,6 +29,8 @@ class WorkoutPlanViewModel: ObservableObject {
         DayPlan(name: "Sunday")
     ]
     
+    @Published var savedPlans: [WorkoutPlanModel] = []
+    
     private let db = Firestore.firestore()
     private let userID: String
     
@@ -35,7 +38,7 @@ class WorkoutPlanViewModel: ObservableObject {
         self.userID = userID
     }
     
-    // MARK: - Function to save a plan under a user
+    // MARK: - Function to save a plan
     func savePlan(name: String) {
         var daysData: [String: DayPlanData] = [:]
         
@@ -54,4 +57,24 @@ class WorkoutPlanViewModel: ObservableObject {
             print("Error saving the plan:", error.localizedDescription)
         }
     }
+    
+    // MARK: - Function to get all the saveed plans
+    func fetchPlans() async {
+        do {
+            // Gets the snapshot for the plans
+            let plans = try await db.collection("users")
+                .document(userID)
+                .collection("workoutPlans")
+                .order(by: "createAt", descending: true)
+                .getDocuments()
+            
+            //Updates the saved plans variable for the view
+            self.savedPlans = plans.documents.compactMap { doc in
+                try? doc.data(as: WorkoutPlanModel.self)
+            }
+        } catch {
+            print("Error fetching plans.")
+        }
+    }
 }
+
