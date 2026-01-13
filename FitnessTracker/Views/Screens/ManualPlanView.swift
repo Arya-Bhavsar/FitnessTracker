@@ -44,10 +44,21 @@ struct ManualPlanView: View {
                     Button("Save Plan") {
                         workoutPlanVM.savePlan(name: planName)
                     }
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
                     .disabled(planName.isEmpty)
                 }
+                .listRowBackground(Color.blue)
             }
             .navigationTitle("Weekly Plan")
         }
     }
+}
+
+#Preview {
+    // Mock User for preview
+    let mockVM = AuthViewModel()
+    mockVM.user = UserModel(id: "1", firstName: "Arya", lastName: "Bhavsar", email: "aryab2914@gmail.com")
+    return ManualPlanView(workoutPlanVM: WorkoutPlanViewModel(userID: mockVM.user!.id!))
 }
