@@ -11,6 +11,9 @@ struct ManualPlanView: View {
     @StateObject var workoutPlanVM: WorkoutPlanViewModel
     @State var planName: String = ""
     
+    // To pop current view from stack, i.e. go back after saving a plan
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -43,6 +46,7 @@ struct ManualPlanView: View {
                 Section {
                     Button("Save Plan") {
                         workoutPlanVM.savePlan(name: planName)
+                        dismiss()
                     }
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
