@@ -19,7 +19,7 @@ struct ManualPlanView: View {
             Form {
                 // Plan Name TextField
                 Section("Plan Name") {
-                    TextField("Enter Plan Name", text: $planName)
+                    TextField("Enter a plan name", text: $planName)
                 }
                 
                 // MARK: - Section for each day of the week
@@ -43,7 +43,9 @@ struct ManualPlanView: View {
                 }
                 
                 // MARK: - Save Button
-                Section {
+                Section(
+                    footer: Text("Navigate to the \"Saved Plans\" tab to see all your plans.")
+                ) {
                     Button("Save Plan") {
                         workoutPlanVM.savePlan(name: planName)
                         dismiss()
