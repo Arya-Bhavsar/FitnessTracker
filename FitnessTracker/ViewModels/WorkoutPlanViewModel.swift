@@ -32,9 +32,13 @@ class WorkoutPlanViewModel: ObservableObject {
     @Published var savedPlans: [WorkoutPlanModel] = []
     
     private let db = Firestore.firestore()
-    private let userID: String
+    private var userID: String
     
     init(userID: String) {
+        self.userID = userID
+    }
+
+    func configure(userID: String) {
         self.userID = userID
     }
     
