@@ -69,7 +69,7 @@ class WorkoutPlanViewModel: ObservableObject {
             let plans = try await db.collection("users")
                 .document(userID)
                 .collection("workoutPlans")
-                .order(by: "createAt", descending: true)
+                .order(by: "createdAt", descending: true)
                 .getDocuments()
             
             //Updates the saved plans variable for the view
