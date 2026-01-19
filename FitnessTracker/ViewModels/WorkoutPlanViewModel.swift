@@ -80,5 +80,29 @@ class WorkoutPlanViewModel: ObservableObject {
             print("Error fetching plans.")
         }
     }
+    
+    // MARK: - Function to delete all the saved plans
+    func deleteAllPlans() async {
+        do {
+            let snapshot = try await db.collection("users")
+                .document(userID)
+                .collection("workoutPlans")
+                .getDocuments()
+            
+            let batch = db.batch()
+            
+            // Removes all the savedPlans documents
+            for plan in snapshot.documents {
+                batch.deleteDocument(plan.reference)
+            }
+            
+            try await batch.commit()
+            
+            // Updates the UI
+            self.savedPlans.removeAll()
+        } catch {
+            print("Error deleting plans:", error.localizedDescription)
+        }
+    }
 }
 
