@@ -77,7 +77,7 @@ class WorkoutPlanViewModel: ObservableObject {
                 try? doc.data(as: WorkoutPlanModel.self)
             }
         } catch {
-            print("Error fetching plans.")
+            print("Error fetching plans:", error.localizedDescription)
         }
     }
     
@@ -102,6 +102,22 @@ class WorkoutPlanViewModel: ObservableObject {
             self.savedPlans.removeAll()
         } catch {
             print("Error deleting plans:", error.localizedDescription)
+        }
+    }
+    
+    // MARK: - Function to delete a plan
+    func deletePlan(plan: WorkoutPlanModel) async {
+        // Make sure the plan has an id
+        guard let planID = plan.id else { return }
+        
+        do {
+            try await db.collection("users").document(userID).collection("workoutPlans").document(planID).delete()
+            
+            if let index = self.savedPlans.firstIndex(where: { $0.id == planID }) {
+                self.savedPlans.remove(at: index)
+            }
+        } catch {
+            print("Error deleting the plan:", error.localizedDescription)
         }
     }
 }

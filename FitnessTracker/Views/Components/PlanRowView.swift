@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct PlanRowView: View {
-    let plan: WorkoutPlanModel
+    @EnvironmentObject var workoutPlanVM: WorkoutPlanViewModel
     
+    let plan: WorkoutPlanModel
     @State private var showDeletePlanAlert: Bool = false
     
     var body: some View {
@@ -32,8 +33,11 @@ struct PlanRowView: View {
                     .foregroundColor(.black)
             }
             .alert("Are you sure you want to delete the plan?", isPresented: $showDeletePlanAlert) {
+                // Alert to delete a plan
                 Button("Confirm", role: .destructive) {
-                    //
+                    Task {
+                        await workoutPlanVM.deletePlan(plan: plan)
+                    }
                 }
             }
         }

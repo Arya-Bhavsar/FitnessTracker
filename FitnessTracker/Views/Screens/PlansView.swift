@@ -20,6 +20,7 @@ struct PlansView: View {
             List {
                 ForEach(workoutPlanVM.savedPlans) { plan in
                     PlanRowView(plan: plan)
+                        .environmentObject(workoutPlanVM)
                 }
             }
             .padding(.top)
