@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ManualPlanView: View {
-    @StateObject var workoutPlanVM: WorkoutPlanViewModel
+    @EnvironmentObject var workoutPlanVM: WorkoutPlanViewModel
+    
     @State var planName: String = ""
     
     // To pop current view from stack, i.e. go back after saving a plan
@@ -60,11 +61,4 @@ struct ManualPlanView: View {
             .navigationTitle("Weekly Plan")
         }
     }
-}
-
-#Preview {
-    // Mock User for preview
-    let mockVM = AuthViewModel()
-    mockVM.user = UserModel(id: "1", firstName: "Arya", lastName: "Bhavsar", email: "aryab2914@gmail.com")
-    return ManualPlanView(workoutPlanVM: WorkoutPlanViewModel(userID: mockVM.user!.id!))
 }

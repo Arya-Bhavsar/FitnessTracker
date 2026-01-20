@@ -29,6 +29,8 @@ struct ContentView: View {
     // Mock User for preview
     let mockVM = AuthViewModel()
     mockVM.user = UserModel(id: "1", firstName: "Arya", lastName: "Bhavsar", email: "aryab2914@gmail.com")
+    let mockPlanVM = WorkoutPlanViewModel(userID: mockVM.user!.id!)
     return ContentView()
         .environmentObject(mockVM)
+        .environmentObject(mockPlanVM)
 }
