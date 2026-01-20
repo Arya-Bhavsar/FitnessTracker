@@ -31,6 +31,10 @@ struct ContentView: View {
     mockVM.user = UserModel(id: "1", firstName: "Arya", lastName: "Bhavsar", email: "aryab2914@gmail.com")
     let mockPlanVM = WorkoutPlanViewModel(userID: mockVM.user!.id!)
     return ContentView()
+        .task {
+            await mockPlanVM.fetchPlans()
+            await mockPlanVM.fetchCurrentPlanID()
+        }
         .environmentObject(mockVM)
         .environmentObject(mockPlanVM)
 }

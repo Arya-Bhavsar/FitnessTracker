@@ -20,7 +20,15 @@ struct PlanRowView: View {
                 PlanDetailsView(plan: plan)
             } label: {
                 HStack {
+                    // Plan name is highlighted if it is the current plan
                     Text(plan.name)
+                        .foregroundColor(plan.id == workoutPlanVM.currentPlanID ? .blue : .primary)
+                    
+                    // Conditionally render a checkmark if the plan is set as the current plan
+                    if plan.id == workoutPlanVM.currentPlanID {
+                        Image(systemName: "checkmark.circle")
+                            .foregroundColor(.blue)
+                    }
                     
                     Spacer()
                     
@@ -28,7 +36,9 @@ struct PlanRowView: View {
                     Menu {
                         // Button to set the plan as the current plan
                         Button("Set as Current", systemImage: "checkmark.circle") {
-                            //
+                            Task {
+                                await workoutPlanVM.setCurrentPlan(plan: plan)
+                            }
                         }
                         
                         // Button to delete the plan
