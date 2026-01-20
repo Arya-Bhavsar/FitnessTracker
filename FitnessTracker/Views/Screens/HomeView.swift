@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var workoutPlanVM: WorkoutPlanViewModel
+    
     var body: some View {
         VStack {
             // The top bar with profile info
@@ -17,7 +19,7 @@ struct HomeView: View {
             ScrollView {
                 VStack(spacing: 12) {
                     // Card with today's workout goals
-                    TodayCardView(todayState: .noActivePlan) // Hardcoded the state for now
+                    TodayCardView(currentPlan: workoutPlanVM.currentPlan)
                         .padding(.bottom, 20)
                     
                     // More cards here

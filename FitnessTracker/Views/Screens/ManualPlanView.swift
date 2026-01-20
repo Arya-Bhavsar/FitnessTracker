@@ -48,7 +48,9 @@ struct ManualPlanView: View {
                     footer: Text("Navigate to the \"Saved Plans\" tab to see all your plans.")
                 ) {
                     Button("Save Plan") {
-                        workoutPlanVM.savePlan(name: planName)
+                        Task {
+                            await workoutPlanVM.savePlan(name: planName)
+                        }
                         dismiss()
                     }
                     .fontWeight(.semibold)

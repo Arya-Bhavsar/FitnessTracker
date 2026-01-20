@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct PlansView: View {
-    @EnvironmentObject var authVM: AuthViewModel
     @EnvironmentObject var workoutPlanVM: WorkoutPlanViewModel
     
     @State private var showDeleteAllAlert: Bool = false
@@ -19,12 +18,14 @@ struct PlansView: View {
             List {
                 ForEach(workoutPlanVM.savedPlans) { plan in
                     PlanRowView(plan: plan)
-                        .environmentObject(workoutPlanVM)
                 }
             }
             .padding(.top)
             .navigationTitle("Saved Plans")
             .background(Color(.systemGroupedBackground))
+            .task {
+                await workoutPlanVM.fetchPlans()
+            }
             .toolbar {
                 // Button to delete all plans
                 Button {

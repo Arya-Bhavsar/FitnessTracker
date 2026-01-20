@@ -31,6 +31,12 @@ class WorkoutPlanViewModel: ObservableObject {
     @Published var savedPlans: [WorkoutPlanModel] = []
     @Published var currentPlanID: String?
     
+    // The current plan set by the user
+    var currentPlan: WorkoutPlanModel? {
+        guard let id = currentPlanID else { return nil }
+        return savedPlans.first(where: { $0.id == id })
+    }
+    
     private let db = Firestore.firestore()
     private var userID: String
     
