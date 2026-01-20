@@ -28,8 +28,8 @@ class WorkoutPlanViewModel: ObservableObject {
         DayPlan(name: "Saturday"),
         DayPlan(name: "Sunday")
     ]
-    
     @Published var savedPlans: [WorkoutPlanModel] = []
+    @Published var currentPlanID: String?
     
     private let db = Firestore.firestore()
     private var userID: String
@@ -118,6 +118,27 @@ class WorkoutPlanViewModel: ObservableObject {
             }
         } catch {
             print("Error deleting the plan:", error.localizedDescription)
+        }
+    }
+    
+    // MARK: - Function to set a plan as the current plan
+    func setCurrentPlan(plan: WorkoutPlanModel) async {
+        guard let planID = plan.id else { return }
+        
+        // Set the current plan
+        self.currentPlanID = planID
+        try? await db.collection("users").document(userID).updateData(["currentPlanID": planID])
+    }
+    
+    // MARK: - Function to get the current plan if it exists
+    func fetchCurrentPlanID() async {
+        do {
+            let snapshot = try await db.collection("users").document(userID).getDocument()
+            
+            // safely gets the current plan id
+            self.currentPlanID = snapshot.data()?["currentPlanID"] as? String
+        } catch {
+            print("Error fetching the current plan:", error.localizedDescription)
         }
     }
 }

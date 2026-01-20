@@ -17,6 +17,7 @@ struct PlansView: View {
     
     var body: some View {
         NavigationStack {
+            // list to print all the saved workout plans
             List {
                 ForEach(workoutPlanVM.savedPlans) { plan in
                     PlanRowView(plan: plan)
