@@ -65,27 +65,4 @@ struct WeeklyProgressView: View {
             }
         }
     }
-    
-    // MARK: - Conditional views for the selected day
-    @ViewBuilder
-    private var dayContent: some View {
-        switch selectedDay {
-        case 0:
-            Text("Monday")
-        case 1:
-            Text("Tuesday")
-        case 2:
-            Text("Wednesday")
-        case 3:
-            Text("Thursday")
-        case 4:
-            Text("Friday")
-        case 5:
-            Text("Saturday")
-        case 6:
-            Text("Sunday")
-        default:
-            Text("No data for this day")
-        }
-    }
 }
