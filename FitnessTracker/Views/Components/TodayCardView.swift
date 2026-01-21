@@ -7,15 +7,21 @@
 
 import SwiftUI
 
-// State enum for today
-enum TodayState {
-    case noActivePlan
-    case restDay
-    case workout([String])
-}
-
 struct TodayCardView: View {
-    let todayState: TodayState
+    let currentPlan: WorkoutPlanModel?
+    
+    // Gets today's name using Calendar and Date
+    private var today: String {
+        let weekday = Calendar.current.component(.weekday, from: Date())
+        let dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        return dayNames[weekday - 1].lowercased()
+    }
+    
+    // Get todays plan (exercises or rest day)
+    private var todayPlan: DayPlanData? {
+        guard let currentPlan = currentPlan else { return nil }
+        return currentPlan.days.first { $0.key.lowercased() == today }?.value
+    }
     
     // MARK: - Main today card view
     var body: some View {
@@ -40,17 +46,16 @@ struct TodayCardView: View {
     // MARK: - Conditional views for the card
     @ViewBuilder
     private var content: some View {
-        switch todayState {
-        case .noActivePlan:
-            Text("No active workout plan\nSelect a new plan to get started!")
+        if currentPlan == nil || todayPlan == nil {
+            Text("No active workout plan.\nSelect a new plan to get started!")
                 .foregroundStyle(.secondary)
-        case .restDay:
-            Text("Rest day!\nTake a break today!")
+        } else if todayPlan!.isRestDay {
+            Text("Rest Day! Take a break today!")
                 .foregroundStyle(.secondary)
-        case .workout(let exercises):
-            // List of exercises
+        } else {
+            // List of exercises for the day -- CHANGE IT TO HAVE A CHECKBOX TO MARK THEM COMPLETE
             VStack(alignment: .leading) {
-                ForEach(exercises, id: \.self) { exercise in
+                ForEach(todayPlan!.exercises, id: \.self) { exercise in
                     Text(exercise)
                 }
             }

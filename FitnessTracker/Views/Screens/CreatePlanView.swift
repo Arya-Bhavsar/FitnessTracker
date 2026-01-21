@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct CreatePlanView: View {
+    @EnvironmentObject var authVM: AuthViewModel
+    
     var body: some View {
         NavigationStack {
             VStack {
                 
-                //MARK: - Link to create a new plan manually
+                // MARK: - Link to create a new plan manually
                 NavigationLink {
                     ManualPlanView()
                 } label: {

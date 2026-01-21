@@ -17,12 +17,21 @@ struct FitnessTrackerApp: App {
     }
     
     @StateObject var authVM = AuthViewModel()
+    @StateObject var workoutPlanVM: WorkoutPlanViewModel = .init(userID: "")
     
     var body: some Scene {
         WindowGroup {
             if authVM.isLoggedIn {
                 ContentView()
+                    .task {
+                        // Initialize workoutPlanVM
+                        guard let userID = authVM.user?.id else { return }
+                        workoutPlanVM.configure(userID: userID)
+                        await workoutPlanVM.fetchPlans()
+                        await workoutPlanVM.fetchCurrentPlanID()
+                    }
                     .environmentObject(authVM)
+                    .environmentObject(workoutPlanVM)
             } else {
                 LoginView()
                     .environmentObject(authVM)
