@@ -53,6 +53,7 @@ struct WeeklyProgressView: View {
                         .shadow(radius: 4)
                 )
             } else {
+                // If no plan is selected as the current plan
                 Text("No active workout plan.\nSelect a new plan to get started!")
                     .foregroundStyle(.secondary)
                     .padding()

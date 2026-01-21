@@ -128,12 +128,22 @@ class WorkoutPlanViewModel: ObservableObject {
     }
     
     // MARK: - Function to set a plan as the current plan
-    func setCurrentPlan(plan: WorkoutPlanModel) async {
+    func followPlan(plan: WorkoutPlanModel) async {
         guard let planID = plan.id else { return }
         
         // Set the current plan
         self.currentPlanID = planID
         try? await db.collection("users").document(userID).updateData(["currentPlanID": planID])
+    }
+    
+    // MARK: - Function to unfollow a plan
+    func unfollowPlan() async {
+        do {
+            try await db.collection("users").document(userID).updateData(["currentPlanID": FieldValue.delete()])
+            self.currentPlanID = nil
+        } catch {
+            print("Error unfollowing the plan:", error.localizedDescription)
+        }
     }
     
     // MARK: - Function to get the current plan if it exists
