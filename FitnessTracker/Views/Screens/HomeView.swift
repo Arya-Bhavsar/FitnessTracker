@@ -23,7 +23,7 @@ struct HomeView: View {
                         .padding(.bottom, 20)
                     
                     // More cards here
-                    WeeklyProgressView()
+                    WeeklyProgressView(currentPlan: workoutPlanVM.currentPlan)
                 }
                 .padding()
                 .frame(maxWidth: .infinity)

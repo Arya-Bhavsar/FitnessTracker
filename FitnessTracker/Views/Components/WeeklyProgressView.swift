@@ -9,8 +9,10 @@ import SwiftUI
 
 struct WeeklyProgressView: View {
     @State private var selectedDay: Int = 0
+    let currentPlan: WorkoutPlanModel?
     
     private let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    private let dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     
     // MARK: - Weekly Progress View
     var body: some View {
@@ -20,7 +22,7 @@ struct WeeklyProgressView: View {
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            // Day Picker
+            // MARK: - Day Picker
             Picker("Day", selection: $selectedDay) {
                 ForEach(days.indices, id: \.self) { index in
                     Text(days[index]).tag(index)
@@ -29,8 +31,20 @@ struct WeeklyProgressView: View {
             .pickerStyle(.segmented)
             .padding(.bottom, 10)
             
-            // View for the selected day
-            dayContent
+            // MARK: - View for the selected day, if a plan is set as current plan
+            if let currentPlan = currentPlan {
+                VStack(alignment: .leading) {
+                    if let dayPlan = currentPlan.days[dayNames[selectedDay]] {
+                        // Print either rest day, or list of exercises
+                        if dayPlan.isRestDay {
+                            Text("Rest day")
+                        } else {
+                            ForEach(dayPlan.exercises, id: \.self) { exercise in
+                                Text(exercise)
+                            }
+                        }
+                    }
+                }
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(
@@ -38,6 +52,17 @@ struct WeeklyProgressView: View {
                         .fill(Color(.secondarySystemGroupedBackground))
                         .shadow(radius: 4)
                 )
+            } else {
+                Text("No active workout plan.\nSelect a new plan to get started!")
+                    .foregroundStyle(.secondary)
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(Color(.secondarySystemGroupedBackground))
+                            .shadow(radius: 4)
+                    )
+            }
         }
     }
     
